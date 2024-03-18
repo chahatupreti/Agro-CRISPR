@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Oct 22 10:30:24 2021
+
+@author: chahat
+"""
+import distance 
+import os
+from collections import defaultdict
+
+
+
+
+Crispr1DR="GTTTTAGAGTCATGTTGTTTAGAATGGTACCAAAAC"
+Crispr2DR="GTTTTAGAGTCATGTTGTTTAGAATGGTACCAAAAC"
+Crispr2DR_RevComp="GTTTTGGTACCATTCTAAACAACATGACTCTAAAAC"
+Crispr3DR="GTTTTTGTACTCTCAATAATTTCTTATCAGTAAAAC"
+Crispr3DR_RevComp="GTTTTACTGATAAGAAATTATTGAGAGTACAAAAAC"
+
+
+C1_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C1_animal"
+C1_human_CC= "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C1_human"
+C2_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C2_animal"
+C2_human_CC= "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C2_human"
+C3_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C3_animal"
+C3_human_CC= "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/CCfinder_results/C3_human"
+
+
+######################################################################
+
+fullDRlist=[] # contains all DRs across all files
+
+def extractspacers (CCfinder_location,Crisprtype,Spacerlocation):
+
+    C1_Spacer_Flags=defaultdict(list)
+    C2_Spacer_Flags=defaultdict(list)
+    C3_Spacer_Flags=defaultdict(list)
+    for path, dirs, files in os.walk(CCfinder_location): 
+        for dirr in dirs:
+            os.mkdir(os.path.join(Spacerlocation,dirr[:-3]))
+            C1_Spacer_Flags[dirr]=[0,0,0]
+            C2_Spacer_Flags[dirr]=[0,0,0]
+            Crisprs_Report=open(path+'/'+dirr+'/TSV/Crisprs_REPORT.tsv').readlines()
+            C3_Spacer_Flags[dirr]=[0,0,0]
+            Array_list = [line.strip() for line in Crisprs_Report if line.strip()]
+            DRlist=[]
+            for i in range(1,len(Array_list)):
+                items=Array_list[i].split('\t')
+                #print(len(items),dirr)
+                DRlist.append(items[10])
+                fullDRlist.append(items[10])
+            for i in range(0,len(DRlist)):
+                if Crisprtype=="C1" and distance.levenshtein(DRlist[i], Crispr1DR)<=3:
+                #if distance.levenshtein(DRlist[i], Crispr1DR)<=3: # for when you want to find CRISPR arrays types other than the one this file is labeled for (based on BLAST results)
+                    C1_Spacer_Flags[dirr][0]=1 # flag that Crispr1 array has been found
+                    inputSpFile=open(path+'/'+dirr+'/CRISPRFinderProperties/'+dirr[:-5]+'_properties/Spacers/Spacers_'+str(i+1)).read()
+                    outputSpFile=open(os.path.join(Spacerlocation,dirr[:-3],'C1_Spacers.txt'),'w')
+                    outputSpFile.write(inputSpFile)
+                    outputSpFile.close()
+                elif Crisprtype=="C2" and distance.levenshtein(DRlist[i], Crispr2DR)<=3:
+                #if distance.levenshtein(DRlist[i], Crispr2DR_RevComp)<=3: # for when you want to find CRISPR arrays types other than the one this file is labeled for (based on BLAST results). Here I have only considered the rev comp of CRISPR2 since 
+                    C1_Spacer_Flags[dirr][1]=1 # flag that Crispr2 array has been found
+                    inputSpFile=open(path+'/'+dirr+'/CRISPRFinderProperties/'+dirr[:-5]+'_properties/Spacers/Spacers_'+str(i+1)).read()
+                    outputSpFile=open(os.path.join(Spacerlocation,dirr[:-3],'C2_Spacers.txt'),'w')
+                    outputSpFile.write(inputSpFile)
+                    outputSpFile.close()
+                elif Crisprtype=="C3" and (distance.levenshtein(DRlist[i], Crispr3DR)<=3)or (distance.levenshtein(DRlist[i], Crispr3DR_RevComp)<=3):
+                #if 2: # for when you want to find CRISPR arrays types other than the one this file is labeled for (based on BLAST results)
+                    C3foundflag=0
+                    if distance.levenshtein(DRlist[i], Crispr3DR)<=3 :
+                        print("correct C3 orientation")
+                        C3foundflag=1
+                    elif distance.levenshtein(DRlist[i], Crispr3DR_RevComp)<=3 :
+                        print("opposite C3 orientation")
+                        C3foundflag=1
+                    if C3foundflag==1:
+                        C1_Spacer_Flags[dirr][2]=1 # flag that Crispr3 array has been found
+                        inputSpFile=open(path+'/'+dirr+'/CRISPRFinderProperties/'+dirr[:-5]+'_properties/Spacers/Spacers_'+str(i+1)).read()
+                        outputSpFile=open(os.path.join(Spacerlocation,dirr[:-3],'C3_Spacers.txt'),'w')
+                        outputSpFile.write(inputSpFile)
+                        outputSpFile.close()
+        break
+    print(Crisprtype+" is DONE")
+    
+######################################################################    
+    
+extractspacers(C1_animal_CC,"C1",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_animal')
+extractspacers(C1_human_CC,"C1",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_human')
+extractspacers(C2_animal_CC,"C2",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C2_animal')
+extractspacers(C2_human_CC,"C2",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C2_human')
+extractspacers(C3_animal_CC,"C3",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C3_animal')
+extractspacers(C3_human_CC,"C3",'/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C3_human')
