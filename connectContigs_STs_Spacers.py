@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 25 20:32:11 2021
-
-@author: chahat
-"""
 
 """
 This code now takes a set of files created using the Overall Data excel sheet (for the 2 sources) that has col1= tab separated contigs (coming from one genome) and col2= ST of that genome. Using these files (Do all of this for both animal and human) - 
