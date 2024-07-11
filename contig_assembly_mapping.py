@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 26 14:08:48 2021
 
-@author: chahat
-"""
+# This code creates a mapping between the assemblies and corresponding contigs
+
 import os
 from collections import defaultdict
 from time import sleep
@@ -15,8 +13,6 @@ animalmapping=defaultdict(list)
 
 humancontiglist=[i[:-4].rstrip() for i in open("/Volumes/bam/DRG/PK/USDA_project/results/2021-11-26/humancontiglist.txt").readlines()] # this file has the list of all contigs taken from /Volumes/bam/DRG/PK/USDA_project/results/2021-09-01/source_and_Ctype_specific_genomes from C1/C2/C3 human folders
 humanmapping=defaultdict(list)
-
-
 
 
 for path, dirs, files in os.walk("/Volumes/bam/DRG/PK/USDA_project/results/2021-09-01/Efs_allanimal_temp"):
@@ -40,11 +36,6 @@ for key,values in animalmapping.items():
     anfile.write(key+'\t'+','.join(values)+'\n')
 anfile.close()
                     
-
-
-
-
-
 
 
 for path, dirs, files in os.walk("/Volumes/bam/DRG/PK/USDA_project/results/2021-09-01/Efs_allhuman_temp"):
