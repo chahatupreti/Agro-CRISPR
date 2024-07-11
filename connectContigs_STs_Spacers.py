@@ -22,26 +22,6 @@ import os
 from collections import defaultdict
 
 
-"""
-THE COMMENTED CODE BELOW WAS MADE FOR A DIFFERENT PURPOSE, BUT IT SHOWS AN IMPORTANT THING - HOW TO IMPORT EXCEL FILES USING XLRD AND CONVERT THE CONTENTS INTO A DICTIONARY. PLEASE REFER TO THIS CODE WHEN YOU NEED TO DO THIS, AND YOU ARE UNABLE TO USE PANDAS
-
-animal_dict = defaultdict(list)
-wb = xlrd.open_workbook('/Volumes/bam/DRG/PK/USDA_project/results/2021-10-31/animalEfs_genome_ST_spacers.xlsx')
-sheet_an = wb.sheet_by_index(0)
-
-for i in range(1, sheet_an.nrows):
-    row = sheet_an.row_values(i)
-    animal_dict[row[0]].append(row[1])
-
-human_dict = defaultdict(list)
-wb_h = xlrd.open_workbook('/Volumes/bam/DRG/PK/USDA_project/results/2021-10-31/humanEfs_genome_ST_spacers.xlsx')
-sheet_hu = wb_h.sheet_by_index(0)
-
-for i in range(1, sheet_hu.nrows):
-    row = sheet_hu.row_values(i)
-    human_dict[row[0]] = row[1]
-"""
-
 # import the file that maps contigs and STs and make a dict with contigs as key and ST as values
 
 animal_contig_ST={}
@@ -160,7 +140,6 @@ hufile.close()
 
 
 # create an output of contig-ST-spacers
-
 
 
 an1file=open("/Volumes/bam/DRG/PK/USDA_project/results/2021-11-26/animal_contig_ST_spacer_mapping.tsv",'w')    
