@@ -1,10 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 30 23:55:21 2020
 
-@author: chahat
-"""
+# Combining the information from assembly structure files and BLAST outputs to get assemblies for BLAST-selected genomes
 
 from collections import defaultdict
 import io
