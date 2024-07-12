@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Dec 10 13:39:38 2020
 
-@author: chahat
-"""
+# This code takes the output of CRISPRCasFinder and extracts individual spacer sequences from them for each CRISPR subtype (C1, C2, C3)
 
 import os 
 import io
 
-#spacersfile_c1=open("/Volumes/bam/DRG/PK/results/2020-12-10/All_Spacers_C1.txt",'w')
-#spacersfile_c2=open("/Volumes/bam/DRG/PK/results/2020-12-10/All_Spacers_C2.txt",'w')
 spacerlist_c1=[]
 spacerlist_c2=[]
 
+# extracting spacers from assemblies that have C1 and are MDR
 c1mdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C1_MDR"
 for path, dirs, files in os.walk(c1mdradd): 
     for file in files:
@@ -31,7 +27,7 @@ for path, dirs, files in os.walk(c1mdradd):
             #            spacersfile_c2.write(line)
                         spacerlist_c2.append(line.rstrip())
 
-        
+# extracting spacers from assemblies that have C1 and are not MDR        
 c1nonmdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C1_nonMDR"
 for path, dirs, files in os.walk(c1nonmdradd): 
     for file in files:
@@ -49,9 +45,8 @@ for path, dirs, files in os.walk(c1nonmdradd):
               #          spacersfile_c2.write(line)
                         spacerlist_c2.append(line.rstrip())
 
-#spacersfile_c3=open("/Volumes/bam/DRG/PK/results/2020-12-10/All_Spacers_C3.txt",'w')
 spacerlist_c3=[]
-
+# extracting spacers from assemblies that have C3 and are MDR
 c3mdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_MDR"
 for path, dirs, files in os.walk(c1mdradd): 
     for file in files:
@@ -62,7 +57,8 @@ for path, dirs, files in os.walk(c1mdradd):
                     if not line.startswith('>'):
  #                       spacersfile_c3.write(line)
                         spacerlist_c3.append(line.rstrip())
-        
+
+# extracting spacers from assemblies that have C3 and are not MDR
 c1nonmdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_nonMDR"
 for path, dirs, files in os.walk(c1nonmdradd): 
     for file in files:
@@ -74,33 +70,19 @@ for path, dirs, files in os.walk(c1nonmdradd):
   #                      spacersfile_c3.write(line)
                         spacerlist_c3.append(line.rstrip())
 
-print(11111111111111111111111111111111111111111)
 print(len(spacerlist_c1))
-print(11111111111111111111111111111111111111111)
 print(len(spacerlist_c2))
-print(11111111111111111111111111111111111111111)
 print(len(spacerlist_c3))
 
 C1spacer_set=set(spacerlist_c1)
 C3spacer_set=set(spacerlist_c3)
 C2spacer_set=set(spacerlist_c2)
 
-print(11111111111111111111111111111111111111111)
 print(len(C1spacer_set))
-print(11111111111111111111111111111111111111111)
 print(len(C2spacer_set))
-print(11111111111111111111111111111111111111111)
 print(len(C3spacer_set))
 
-#spacersfile_c1.close()        
-#spacersfile_c3.close()                
-#spacersfile_c2.close()        
-
-# 3373 c1 and c2 spacers total
-# 590 c3 spacers total
-
-# 526 and 204 after setting
-
+# creating sets for the lists
 totalSpacerlist=spacerlist_c1+spacerlist_c2+spacerlist_c3
 print(len(totalSpacerlist))
 totalSpacerSet=set(totalSpacerlist)
