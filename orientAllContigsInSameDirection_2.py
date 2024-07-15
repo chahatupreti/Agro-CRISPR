@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Oct 21 15:14:51 2021
-
-@author: chahat
-"""
 
 # The goal of this code is to align all the contigs in the same direction so that all CRISPRs are identified in the same direction. That way when we make a CRISPR dictionary, the spacers that are common are identifed, rather than them being reverse complements of each other. 
 
