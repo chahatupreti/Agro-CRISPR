@@ -6,7 +6,7 @@ Created on Thu Oct 21 15:14:51 2021
 @author: chahat
 """
 
-# The goal of this code is to align all the contigs in the same direction so that all crisprs are identified in the same direction. That way when we later make a crispr dictionary, the spacers that are common are identifed, rather than them being reverse complements of each other. This is diffferent from the previous code with the same name since here I deal directly with the csv file that has the start and end positions, rather than making another (set of) files with the +/- sign
+# The goal of this code is to align all the contigs in the same direction so that all CRISPRs are identified in the same direction. That way when we make a CRISPR dictionary, the spacers that are common are identifed, rather than them being reverse complements of each other. 
 
 import io
 import os
@@ -15,7 +15,7 @@ import shutil
 
 
 def reverse_complement(dna):
-    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N', 'R': 'Y', 'Y':'R', 'S':'S', 'W':'W', 'M':'K', 'K':'M', 'B':'B', 'D':'D', 'H':'H', 'V':'V'} # added 'N': 'N' as some nucleotides are N, so its best reverse complement would be N I guess? And same for B? B means C/G/T ! And D,H,V!
+    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N', 'R': 'Y', 'Y':'R', 'S':'S', 'W':'W', 'M':'K', 'K':'M', 'B':'B', 'D':'D', 'H':'H', 'V':'V'} 
     return ''.join([complement[base] for base in dna[::-1]])
 
 
