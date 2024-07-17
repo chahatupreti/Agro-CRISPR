@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 23 04:50:41 2021
 
-@author: chahat
-"""
 import distance 
 import os
 from collections import defaultdict
-
 
 
 
@@ -51,17 +46,7 @@ for path, dirs, files in os.walk(C1_contigs_aligned_MDR_CC):
                     if name[0].endswith(str(int(i)+1)):
                         outputArrayFile.write('>'+j)                    
                         outputArrayFile.close()
-        # COMMENTING OUT THE CODE BELOW SINCE WE WILL USE THE CYDA METHOD FOR CRISPR2
-            # elif distance.levenshtein(DRlist[i], Crispr2DR_RevComp)<=3:
-            #     C1_Spacer_Flags[dirr][1]=1 # flag that Crispr2 array has been found
-            #     inputArrayFile=open(path+'/'+dirr+'/rawCRISPRs.fna').read()
-            #     outputArrayFile=open("/Volumes/bam/DRG/PK/results/2021-06-22/CRISPR_arrays/C2_MDR/"+dirr[:-3]+'_C2_array.txt','w')
-            #     arrays=inputArrayFile.split('>')
-            #     for j in arrays[1:]:
-            #         name=j.split()
-            #         if name[0].endswith(str(int(i)+1)):
-            #             outputArrayFile.write('>'+j)                    
-            #             outputArrayFile.close()
+
             elif (distance.levenshtein(DRlist[i], Crispr3DR)<=3)or (distance.levenshtein(DRlist[i], Crispr3DR_RevComp)<=3):
                 C1_Spacer_Flags[dirr][2]=1 # flag that Crispr3 array has been found
                 print("Found C3 in C1!! The strain is "+dirr[:-3])
@@ -80,7 +65,6 @@ print("C1 contig (MDR) DONE")
 C3_Spacer_Flags=defaultdict(list)
 for path, dirs, files in os.walk(C3_contigs_aligned_MDR_CC): 
     for dirr in dirs:
-        # os.mkdir("/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_MDR/"+dirr[:-3])
         C3_Spacer_Flags[dirr]=[0,0,0]
         Crisprs_Report=open(path+'/'+dirr+'/TSV/Crisprs_REPORT.tsv').readlines()
         Array_list = [line.strip() for line in Crisprs_Report if line.strip()]
@@ -99,24 +83,12 @@ for path, dirs, files in os.walk(C3_contigs_aligned_MDR_CC):
                     if name[0].endswith(str(int(i)+1)):
                         outputArrayFile.write('>'+j)                    
                         outputArrayFile.close()
-        # COMMENTING OUT THE CODE BELOW SINCE WE WILL USE THE CYDA METHOD FOR CRISPR2
-            # elif (distance.levenshtein(DRlist[i], Crispr2DR)<=3)or (distance.levenshtein(DRlist[i], Crispr2DR_RevComp)<=3):
-            #     C3_Spacer_Flags[dirr][1]=1 # flag that Crispr2 array has been found
-            #     inputArrayFile=open(path+'/'+dirr+'/rawCRISPRs.fna').read()
-            #     outputArrayFile=open("/Volumes/bam/DRG/PK/results/2021-06-22/CRISPR_arrays/C3_MDR/"+dirr[:-3]+'_C2_array.txt','w')
-            #     arrays=inputArrayFile.split('>')
-            #     for j in arrays[1:]:
-            #         name=j.split()
-            #         if name[0].endswith(str(int(i)+1)):
-            #             outputArrayFile.write('>'+j)                    
-            #             outputArrayFile.close()
     break
 print("C3 contig (MDR) DONE")
 
 # # C1 contig (non-MDR)
 for path, dirs, files in os.walk(C1_contigs_aligned_nonMDR_CC): 
     for dirr in dirs:
-        #os.mkdir("/Volumes/bam/DRG/PK/results/2021-06-22/CRISPR_arrays/C1_MDR/"+dirr[:-3])
         C1_Spacer_Flags[dirr]=[0,0,0]
         Crisprs_Report=open(path+'/'+dirr+'/TSV/Crisprs_REPORT.tsv').readlines()
         Array_list = [line.strip() for line in Crisprs_Report if line.strip()]
@@ -136,17 +108,7 @@ for path, dirs, files in os.walk(C1_contigs_aligned_nonMDR_CC):
                     if name[0].endswith(str(int(i)+1)):
                         outputArrayFile.write('>'+j)                    
                         outputArrayFile.close()
-        # COMMENTING OUT THE CODE BELOW SINCE WE WILL USE THE CYDA METHOD FOR CRISPR2
-            # elif distance.levenshtein(DRlist[i], Crispr2DR_RevComp)<=3:
-            #     C1_Spacer_Flags[dirr][1]=1 # flag that Crispr2 array has been found
-            #     inputArrayFile=open(path+'/'+dirr+'/rawCRISPRs.fna').read()
-            #     outputArrayFile=open("/Volumes/bam/DRG/PK/results/2021-06-22/CRISPR_arrays/C2_MDR/"+dirr[:-3]+'_C2_array.txt','w')
-            #     arrays=inputArrayFile.split('>')
-            #     for j in arrays[1:]:
-            #         name=j.split()
-            #         if name[0].endswith(str(int(i)+1)):
-            #             outputArrayFile.write('>'+j)                    
-            #             outputArrayFile.close()
+
             elif (distance.levenshtein(DRlist[i], Crispr3DR)<=3)or (distance.levenshtein(DRlist[i], Crispr3DR_RevComp)<=3):
                 C1_Spacer_Flags[dirr][2]=1 # flag that Crispr3 array has been found
                 inputArrayFile=open(path+'/'+dirr+'/rawCRISPRs.fna').read()
@@ -164,7 +126,6 @@ print("C1 contig (non-MDR) DONE")
 # # C3 contig (non-MDR)
 for path, dirs, files in os.walk(C3_contigs_aligned_nonMDR_CC): 
     for dirr in dirs:
-        # os.mkdir("/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_MDR/"+dirr[:-3])
         C3_Spacer_Flags[dirr]=[0,0,0]
         Crisprs_Report=open(path+'/'+dirr+'/TSV/Crisprs_REPORT.tsv').readlines()
         Array_list = [line.strip() for line in Crisprs_Report if line.strip()]
@@ -183,17 +144,6 @@ for path, dirs, files in os.walk(C3_contigs_aligned_nonMDR_CC):
                     if name[0].endswith(str(int(i)+1)):
                         outputArrayFile.write('>'+j)                    
                         outputArrayFile.close()
-        # COMMENTING OUT THE CODE BELOW SINCE WE WILL USE THE CYDA METHOD FOR CRISPR2
-            # elif (distance.levenshtein(DRlist[i], Crispr2DR)<=3)or (distance.levenshtein(DRlist[i], Crispr2DR_RevComp)<=3):
-            #     C3_Spacer_Flags[dirr][1]=1 # flag that Crispr2 array has been found
-            #     inputArrayFile=open(path+'/'+dirr+'/rawCRISPRs.fna').read()
-            #     outputArrayFile=open("/Volumes/bam/DRG/PK/results/2021-06-22/CRISPR_arrays/C3_nonMDR/"+dirr[:-3]+'_C2_array.txt','w')
-            #     arrays=inputArrayFile.split('>')
-            #     for j in arrays[1:]:
-            #         name=j.split()
-            #         if name[0].endswith(str(int(i)+1)):
-            #             outputArrayFile.write('>'+j)                    
-            #             outputArrayFile.close()
     break
 print("C3 contig (non-MDR) DONE")
 
