@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 """
-This code now takes a set of files created using the Overall Data excel sheet (for the 2 sources) that has col1= tab separated contigs (coming from one genome) and col2= ST of that genome. Using these files (Do all of this for both animal and human) - 
-1) it makes a dictionary with contigs as the keys and the STs as the values. 
-2) Next, it extracts the spacers for each contig from the files and makes another dictionary which has the contigs as the keys and spacers as the values. 
+This code takes files that have col1= tab separated contigs (coming from one genome) and col2= ST of that genome. Using these files - 
+1) It makes a dictionary with contigs as the keys and the STs as the values. 
+2) Extracts the spacers for each contig from the files and makes another dictionary that has the contigs as the keys and spacers as the values. 
 3) Then using these two dictionaries, it makes a dictionary which has STs as the key and spacers as the values. 
-4) Then I make the set of spacers unique and using this last dictionary, make another one with unique spacers as the key and corresponding STs as the values. 
-5)Use the final dictionary to ask questions about specific set of spacers with corresponding targets
+4) Then it makes the set of spacers unique and using this last dictionary, make another one with unique spacers as the key and corresponding STs as the values. 
+5) Use the final dictionary to ask questions about specific set of spacers with corresponding targets
 """
 
 
@@ -40,7 +40,7 @@ for line in human_contig_ST_input:
         human_contig_ST[c]=ST
 
 
-# extract the spacers for each contig from the files and makes another dictionary which has the contigs as the keys and spacers as the values. 
+# extract the spacers for each contig from the files and make another dictionary with the contigs as the keys and spacers as the values. 
 C1_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_animal"
 C1_human_CC= "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_human"
 C2_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C2_animal"
@@ -135,7 +135,6 @@ hufile.close()
 
 
 # create an output of contig-ST-spacers
-
 
 an1file=open("/Volumes/bam/DRG/PK/USDA_project/results/2021-11-26/animal_contig_ST_spacer_mapping.tsv",'w')    
 for key,values in animal_contig_ST.items():
