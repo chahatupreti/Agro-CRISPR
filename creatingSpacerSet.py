@@ -9,6 +9,7 @@ import io
 spacerlist_c1=[]
 spacerlist_c2=[]
 
+#---------------------------------------
 # extracting spacers from assemblies that have C1 and are MDR
 c1mdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C1_MDR"
 for path, dirs, files in os.walk(c1mdradd): 
@@ -27,6 +28,7 @@ for path, dirs, files in os.walk(c1mdradd):
             #            spacersfile_c2.write(line)
                         spacerlist_c2.append(line.rstrip())
 
+#---------------------------------------
 # extracting spacers from assemblies that have C1 and are not MDR        
 c1nonmdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C1_nonMDR"
 for path, dirs, files in os.walk(c1nonmdradd): 
@@ -45,6 +47,7 @@ for path, dirs, files in os.walk(c1nonmdradd):
               #          spacersfile_c2.write(line)
                         spacerlist_c2.append(line.rstrip())
 
+#---------------------------------------
 spacerlist_c3=[]
 # extracting spacers from assemblies that have C3 and are MDR
 c3mdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_MDR"
@@ -55,9 +58,9 @@ for path, dirs, files in os.walk(c1mdradd):
                 cfile=io.open(os.path.join(path,file), encoding="utf8").readlines()
                 for line in cfile:
                     if not line.startswith('>'):
- #                       spacersfile_c3.write(line)
                         spacerlist_c3.append(line.rstrip())
 
+#---------------------------------------
 # extracting spacers from assemblies that have C3 and are not MDR
 c1nonmdradd="/Volumes/bam/DRG/PK/results/2020-08-21/Spacers/C3_nonMDR"
 for path, dirs, files in os.walk(c1nonmdradd): 
