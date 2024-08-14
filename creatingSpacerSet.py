@@ -85,6 +85,7 @@ print(len(C1spacer_set))
 print(len(C2spacer_set))
 print(len(C3spacer_set))
 
+#---------------------------------------
 # creating sets for the lists
 totalSpacerlist=spacerlist_c1+spacerlist_c2+spacerlist_c3
 print(len(totalSpacerlist))
