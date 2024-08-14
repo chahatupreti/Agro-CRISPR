@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# This code collected direct repeats for all identified CRISPR sequences so that they can be tested as belonging to bonafide CRISPR arrays. It does this for each CRISPR subtype
+# This code collects direct repeats for all identified CRISPR sequences so that they can be tested as belonging to bonafide CRISPR arrays. It does this for each CRISPR subtype
 
 import distance 
 import os
