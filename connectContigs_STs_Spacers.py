@@ -16,7 +16,7 @@ import xlrd
 import os
 from collections import defaultdict
 
-
+#---------------------------------------
 # import the file that maps contigs and STs and make a dict with contigs as key and ST as values
 
 animal_contig_ST={}
@@ -39,7 +39,7 @@ for line in human_contig_ST_input:
     for c in contiglist:
         human_contig_ST[c]=ST
 
-
+#---------------------------------------
 # extract the spacers for each contig from the files and make another dictionary with the contigs as the keys and spacers as the values. 
 C1_animal_CC = "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_animal"
 C1_human_CC= "/Volumes/bam/DRG/PK/USDA_project/results/2021-10-21/Spacers/C1_human"
@@ -79,7 +79,7 @@ SpacerPerGenome(C1_human_CC,'human','C1')
 SpacerPerGenome(C2_human_CC,'human','C2')
 SpacerPerGenome(C3_human_CC,'human','C3')
 
-
+#---------------------------------------
 # using the above two dictionaries, make another that maps ST to spacers
 
 animal_ST_spacers={}
@@ -100,7 +100,7 @@ for key,values in human_contig_ST.items():
             human_ST_spacers[values]=human_contig_spacers[key]
         
         
-
+#---------------------------------------
 # make a final dict which has unique spacers as keys and their corresponding STs as values
 uniquespacers=set(allspacers)
 
@@ -133,7 +133,7 @@ for key,values in human_spacer_STs.items():
 hufile.close()
 
 
-
+#---------------------------------------
 # create an output of contig-ST-spacers
 
 an1file=open("/Volumes/bam/DRG/PK/USDA_project/results/2021-11-26/animal_contig_ST_spacer_mapping.tsv",'w')    
